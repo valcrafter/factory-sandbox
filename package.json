@@ -3,9 +3,12 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Small todo API that the software-factory POC agents work on.",
+  "description": "Small todo app (web UI on GitHub Pages + API) that the software-factory POC agents work on.",
   "scripts": {
     "start": "tsx src/server.ts",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
@@ -19,6 +22,7 @@
     "supertest": "^7.3.1",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3",
+    "vite": "^8.3.3",
     "vitest": "^5.0.3"
   }
 }
