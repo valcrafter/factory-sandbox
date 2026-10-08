@@ -3,24 +3,16 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Small todo app (web UI on GitHub Pages + API) that the software-factory POC agents work on.",
+  "description": "Tempo: example product landing page that the software-factory POC agents change through pull requests.",
   "scripts": {
-    "start": "tsx src/server.ts",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
-  "dependencies": {
-    "express": "^5.2.1"
-  },
   "devDependencies": {
-    "@types/express": "^5.0.6",
     "@types/node": "^22.20.5",
-    "@types/supertest": "^7.2.1",
-    "supertest": "^7.3.1",
-    "tsx": "^4.23.15",
     "typescript": "^5.9.3",
     "vite": "^8.3.3",
     "vitest": "^5.0.3"
