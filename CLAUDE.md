@@ -1,28 +1,27 @@
 # factory-sandbox
 
-A small TypeScript todo app: a web UI deployed to GitHub Pages, plus an Express API. Agents in the software-factory POC implement and review tickets against it.
+**Tempo**: an example product landing page (a fictional product) deployed to GitHub Pages. Agents in the software-factory POC change it through pull requests.
 
 ## Commands
 - `npm ci`: install dependencies
 - `npm run typecheck`: TypeScript check, must pass
-- `npm test`: Vitest + Supertest suite, must pass
-- `npm run build`: builds the web UI into `dist/`, must pass
-- `npm run dev`: web UI with hot reload
-- `npm start`: run the API on port 3000
+- `npm test`: Vitest suite, must pass
+- `npm run build`: builds the page into `dist/`, must pass
+- `npm run dev`: local preview with hot reload
 
 ## Layout
-- `src/store.ts`: todo data and operations. Shared by the API and the web UI.
-- `src/validation.ts`: input validation. Shared by the API and the web UI.
-- `src/app.ts`: API routes. Keep handlers thin.
-- `web/`: the web UI (`index.html`, `main.ts`, `style.css`). It uses `src/` directly and keeps todos in localStorage.
-- `test/`: tests for `src/` and the API.
+- `web/index.html`: page content and sections. Every section has an `id`; nav links point at those ids.
+- `web/style.css`: all styling. Colors and radii are CSS variables in `:root`, with dark-mode values under `prefers-color-scheme: dark`.
+- `web/main.ts`: rendering and event wiring only (pricing cards, billing toggle, build footer).
+- `src/`: logic used by the page (`pricing.ts`). Logic goes here, with tests.
+- `test/`: `pricing.test.ts` for logic, `page.test.ts` for page structure (sections exist, anchor links resolve, one h1).
 
 ## Conventions
-- Put logic in `src/` with tests; keep `web/main.ts` to rendering and event wiring.
-- Validation errors return 400 with `{ "error": "<message>" }`. Missing resources return 404 with `{ "error": "not found" }`. The web UI shows the same messages.
-- Every behavior change comes with a test in `test/`.
+- Use the CSS variables for colors; every change must look right in light and dark mode.
+- Keep the page accessible: real buttons and links, alt text or `aria-hidden` on decorative icons, one `h1`.
+- New logic gets tests in `test/`. New sections get an `id` and, if linked, a nav link.
 - Don't add dependencies unless the ticket needs one.
-- Commit messages start with the ticket key, for example `FAC-2: validate todo titles`.
+- Commit messages start with the ticket key, for example `FAC-1: add testimonials section`.
 
 ## Deployment
-Every push to `main` deploys the web UI to GitHub Pages (`.github/workflows/pages.yml`). The page footer shows the deployed commit.
+Every push to `main` deploys to GitHub Pages (`.github/workflows/pages.yml`). The footer shows the deployed commit.
