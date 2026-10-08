@@ -88,6 +88,20 @@ h2 { font-size: 32px; text-align: center; margin: 0 0 32px; letter-spacing: -0.0
 .plan ul { margin: 4px 0 8px; padding-left: 18px; color: var(--muted); flex: 1; }
 .plan .button { text-align: center; }
 
+.faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 720px; margin: 0 auto; }
+.faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.faq-item[open] { border-color: var(--accent); }
+.faq-item summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px;
+  font-weight: 600; color: var(--text); cursor: pointer; list-style: none; border-radius: var(--radius);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; content: "+" / ""; flex: none; font-size: 22px; line-height: 1; color: var(--accent); }
+.faq-item[open] summary::after { content: "−"; content: "−" / ""; }
+.faq-item summary:hover { color: var(--accent); }
+.faq-item summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.faq-item p { margin: 0; padding: 0 22px 20px; color: var(--muted); }
+
 .cta { text-align: center; background: var(--accent-soft); border-radius: 24px; margin: 32px 0 64px; padding: 56px 24px; }
 .cta h2 { margin-bottom: 8px; }
 .cta p { color: var(--muted); margin: 0 0 24px; }
