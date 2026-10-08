@@ -1,8 +1,8 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
+import { declaration, rootVars, rule, rules } from "./css";
 
 const html = readFileSync(new URL("../web/index.html", import.meta.url), "utf8");
-const css = readFileSync(new URL("../web/style.css", import.meta.url), "utf8");
 
 const section = html.match(/<section id="testimonials"[\s\S]*?<\/section>/)?.[0] ?? "";
 const cards = section.split(/(?=<figure\b)/).slice(1);
@@ -10,41 +10,8 @@ const cards = section.split(/(?=<figure\b)/).slice(1);
 const text = (fragment: string, className: string) =>
   fragment.match(new RegExp(`class="${className}"[^>]*>([^<]*)<`))?.[1].trim() ?? "";
 
-interface Rule {
-  media: string | null;
-  selector: string;
-  body: string;
-}
-
-/** Flat list of CSS rules, with the enclosing @media condition (one level deep, which is all style.css uses). */
-function parseRules(source: string): Rule[] {
-  const rules: Rule[] = [];
-  const re = /([^{}]+)\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g;
-  for (const [, head, body] of source.replace(/\/\*[\s\S]*?\*\//g, "").matchAll(re)) {
-    const prelude = head.trim();
-    if (prelude.startsWith("@media")) {
-      for (const [, selector, inner] of body.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
-        rules.push({ media: prelude, selector: selector.trim(), body: inner });
-      }
-    } else {
-      rules.push({ media: null, selector: prelude, body });
-    }
-  }
-  return rules;
-}
-
-const rules = parseRules(css);
-const rule = (selector: string, media: string | null = null) =>
-  rules.find((r) => r.media === media && r.selector.split(",").map((s) => s.trim()).includes(selector));
-const declaration = (r: Rule | undefined, property: string) =>
-  r?.body.match(new RegExp(`(?:^|;|\\s)${property}\\s*:\\s*([^;]+)`))?.[1].trim();
-
 const testimonialSelectors = [".testimonials", ".testimonial", ".avatar", ".person"];
 const testimonialRules = rules.filter((r) => testimonialSelectors.some((s) => r.selector.includes(s)));
-
-/** Custom properties defined in a :root block, optionally inside a given @media. */
-const rootVars = (media: string | null) =>
-  new Set([...(rule(":root", media)?.body.matchAll(/(--[\w-]+)\s*:/g) ?? [])].map((m) => m[1]));
 
 describe("testimonials section", () => {
   it("exists with an id and the 'Loved by calm teams' heading", () => {
