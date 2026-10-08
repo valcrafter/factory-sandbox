@@ -6,13 +6,18 @@ const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
 
 describe("landing page", () => {
   it("has the main sections", () => {
-    for (const id of ["features", "pricing", "signup"]) expect(ids.has(id), `#${id}`).toBe(true);
+    for (const id of ["features", "testimonials", "pricing", "signup"]) expect(ids.has(id), `#${id}`).toBe(true);
   });
 
   it("only links to sections that exist", () => {
     const anchors = [...html.matchAll(/href="#([^"]+)"/g)].map((m) => m[1]);
     expect(anchors.length).toBeGreaterThan(0);
     for (const anchor of anchors) expect(ids.has(anchor), `#${anchor}`).toBe(true);
+  });
+
+  it("has unique ids", () => {
+    const all = [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
+    expect(all.length).toBe(ids.size);
   });
 
   it("has a single h1", () => {
