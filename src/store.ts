@@ -31,7 +31,7 @@ export class TodoStore {
     if (!existing) return undefined;
     const updated: Todo = {
       ...existing,
-      title: patch.title ?? "",
+      title: patch.title ?? existing.title,
       completed: patch.completed ?? false,
     };
     this.todos.set(id, updated);
