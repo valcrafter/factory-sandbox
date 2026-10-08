@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Factory Todos</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <h1>Todos</h1>
+        <p class="subtitle">Built and shipped by the software factory's agents.</p>
+      </header>
+      <form id="new-todo" class="new-todo" autocomplete="off">
+        <input id="title" name="title" placeholder="What needs doing?" aria-label="New todo" />
+        <button type="submit">Add</button>
+      </form>
+      <p id="error" class="error" role="alert" hidden></p>
+      <ul id="list" class="list" aria-label="Todos"></ul>
+      <p id="empty" class="empty" hidden>Nothing to do.</p>
+      <footer id="build" class="build"></footer>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
