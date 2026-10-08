@@ -1,0 +1,43 @@
+.github/workflows/ci.yml
+  s_44739b89b968ee::t_ca8f3d1daf0de5 20
+.github/workflows/pages.yml
+  s_44739b89b968ee::t_045605c385495d 1-42
+.gitignore
+  s_44739b89b968ee::t_cd08d631c8dfb6 2
+CLAUDE.md
+  s_44739b89b968ee::t_73ee2dfa13d39f 3,9-10,14-18,21-22,26-28
+README.md
+  s_44739b89b968ee::t_947de5301ef906 3-6
+package-lock.json
+  s_44739b89b968ee::t_596218bcd0e72a 20,787,2209
+package.json
+  s_44739b89b968ee::t_8c4c4d8748ef7f 6,9-11,25
+tsconfig.json
+  s_44739b89b968ee::t_ff587f0ff2e8b7 10-17,19-25
+vite.config.ts
+  s_44739b89b968ee::t_2f87310bf0390b 1-16
+vitest.config.ts
+  s_44739b89b968ee::t_ed58e5d4d0187b 1-6
+web/index.html
+  s_44739b89b968ee::t_345c8cad2115d8 1-26
+web/main.ts
+  s_44739b89b968ee::t_ff04d353452003 1-113
+web/style.css
+  s_44739b89b968ee::t_0c3c44eb8329d9 1-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2966972139b8ab2a02d120e894c89fe72c66f7ab",
+  "prompts": {},
+  "sessions": {
+    "s_44739b89b968ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "97490429-b5a0-483c-a5ba-9664242360e9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "valcrafter <tomaszs@port.io>"
+    }
+  }
+}
