@@ -40,7 +40,10 @@ export const PLANS: Plan[] = [
 
 /** Price per user per month for the chosen billing period. */
 export function pricePerMonth(plan: Plan, billing: Billing): number {
-  if (billing === "yearly") return plan.monthly * (1 - YEARLY_DISCOUNT / 100);
+  if (billing === "yearly") {
+    // YEARLY_DISCOUNT is already a fraction; round to whole cents to avoid float noise (12 * 0.8 = 9.600000000000001).
+    return Math.round(plan.monthly * (1 - YEARLY_DISCOUNT) * 100) / 100;
+  }
   return plan.monthly;
 }
 
