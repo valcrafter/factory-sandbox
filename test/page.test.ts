@@ -24,3 +24,24 @@ describe("landing page", () => {
     expect(html.match(/<h1[\s>]/g)).toHaveLength(1);
   });
 });
+
+const css = readFileSync(new URL("../web/style.css", import.meta.url), "utf8");
+
+describe("accessibility", () => {
+  it("has a skip link as the first element in body targeting main", () => {
+    const body = html.slice(html.indexOf("<body>") + 6).trim();
+    expect(body).toMatch(/^<a class="skip-link" href="#top">Skip to content<\/a>/);
+    expect(html).toMatch(/<main id="top"[^>]*tabindex="-1"/);
+  });
+
+  it("has an accent focus ring for links and buttons", () => {
+    expect(css).toMatch(/a:focus-visible,\s*button:focus-visible\s*\{[^}]*var\(--accent\)/);
+    expect(css).toMatch(/\.skip-link:focus\s*\{/);
+  });
+
+  it("only uses smooth scrolling when motion is not reduced", () => {
+    const stripped = css.replace(/@media \(prefers-reduced-motion: no-preference\)\s*\{[\s\S]*?\n\}/g, "");
+    expect(css).toContain("prefers-reduced-motion: no-preference");
+    expect(stripped).not.toContain("scroll-behavior: smooth");
+  });
+});
